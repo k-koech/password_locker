@@ -29,7 +29,16 @@ class TestDetails(unittest.TestCase):
         self.assertEqual(self.new_details.username, 'Collo')
         self.assertEqual(self.new_details.password, 'Collo2')
 
+    def tearDown(self):
 
+        Details.detail_list = []
+
+    def test_save_multiple_accounts(self):
+
+        self.new_details.save_details()
+        test_details = Details('LinkedIn', 'Collo', 'Koech')
+        test_details.save_details()
+        self.assertEqual(len(Details.detail_list),2)
 
 if __name__ == '__main__':
     unittest.main()
