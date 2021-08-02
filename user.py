@@ -27,3 +27,7 @@ class User:
             if(user.username == username and user.password == password):
                 current_user = user.name
             return current_user
+
+class Details:
+
+    detail_list = []
