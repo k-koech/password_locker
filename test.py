@@ -40,5 +40,32 @@ class TestDetails(unittest.TestCase):
         test_details.save_details()
         self.assertEqual(len(Details.detail_list),2)
 
+    def test_delete_details(self):
+
+        self.new_details.save_details()
+        test_details = Details('FB', 'Collo', 'Koech1')
+        test_details.save_details()
+        self.new_details.delete_details()
+        self.assertEqual(len(Details.detail_list),1)
+
+    def test_find_details(self):
+
+        self.new_credentials.save_details()
+        test_details = Details('Twitter', 'Dorothy', 'Muhonja5')
+        test_details.save_details()
+        find_details = Details.find_account_name('Twitter')
+        self.assertEqual(find_details.account_name,test_details.account_name)
+    
+    def test_details_exist(self):
+        """
+        test to check if we can return True or False in regards to finding the details
+        """
+        self.new_details.save_details()
+        test_details = Details('Twitter','Dorothy','Muhonja5')
+        test_details.save_details()
+        details_exist = Details.details_exist('Twitter')
+        self.assertTrue(details_exist)
+
+
 if __name__ == '__main__':
     unittest.main()
