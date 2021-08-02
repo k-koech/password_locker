@@ -31,6 +31,17 @@ def display_detail_list():
 def delete_details(details):
     details.delete_details()
 
+def main():
+    print('Hi.Welcome to Password Locker.')
+    print('\n')
+    print('Select the short_cord to navigate through:')
+    print('\n')
+    print('to create new user use "NU":')
+    print('\n')
+    print('to login use "LG" or "Ex" to exit')
+    print('\n')
+    
+
 
 if __name__ == '__main__':
     main()
