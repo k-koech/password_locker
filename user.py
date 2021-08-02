@@ -48,3 +48,10 @@ class Details:
         delete_details deletes a saved details in the detail_list
         """
         Details.detail_list.remove(self)  
+
+    @classmethod
+    def display_details(cls):
+        """
+        display_detail shows all details in the detail_list
+        """
+        return cls.detail_list
