@@ -18,6 +18,17 @@ class TestUser(unittest.TestCase):
         self.assertEqual(len(User.user_list), 1)
 
 
+class TestDetails(unittest.TestCase):
+
+    def setUp(self):
+        self.new_details = Details('Inst', 'Collo', 'Collo2')
+
+    def test_init(self):
+
+        self.assertEqual(self.new_details.account_name, 'Inst')
+        self.assertEqual(self.new_details.username, 'Collo')
+        self.assertEqual(self.new_details.password, 'Collo2')
+
 
 
 if __name__ == '__main__':
