@@ -16,4 +16,14 @@ class User:
         """
         User.user_list.append(self)
 
-    
+    @classmethod
+    def user_exist(cls,username,password):
+        """
+        user_exist confirms if the user exist in the user_list
+        """
+
+        current_user = ''
+        for user in User.user_list:
+            if(user.username == username and user.password == password):
+                current_user = user.name
+            return current_user
