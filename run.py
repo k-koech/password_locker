@@ -40,7 +40,58 @@ def main():
     print('\n')
     print('to login use "LG" or "Ex" to exit')
     print('\n')
-    
+    print('to delete Account use "DU"')
+    short_code = input().lower()
+    if short_code == 'nu':
+        print('Enter new account details')
+        print('\n')
+        username = input('Enter Username: ')
+        while True:
+            print('CP = to create password')
+            password_choice = input().lower()
+            if password_choice == 'cp':
+                password = input('Confirm Password: ')
+                print('\n')
+
+            else:
+                print('Invalid password. Try again')
+            save_user(create_user(username, password))
+
+        print('\n')
+        print(
+            f'Welcome {username} to your account')
+        print('\n')
+
+    elif short_code == 'lg':
+        print('Enter Your Account Username and Password to Login')
+        username = input('Username:')
+        password = input('Password:')
+        check_user = sign_in(username, password)
+        if sign_in == check_user:
+            print(f'Welcome back {username}')
+            print('\n')
+
+        elif short_code == 'du':
+            print('Are you sure want to delete Account??? If YES,type')
+            username = input('Username :')
+            password = input('Password:')
+            check_user = sign_in(username, password)
+            if sign_in == check_user:
+                print(f'Account {username} has been successfully deleted ')
+                print('\n')
+
+            else:
+                print('Incorrect account name')
+                print('\n')
+
+
+        elif short_code == 'ex':
+            print('We are Sorry to see you leave!!!!')
+            print('\n')
+
+        else:
+            print('Invalid Pasword. Try again!')
+            print('\n')
 
 
 if __name__ == '__main__':
