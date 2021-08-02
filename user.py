@@ -31,3 +31,16 @@ class User:
 class Details:
 
     detail_list = []
+
+    def __init__(self, username, password):
+
+        self.username = username
+        self.password = password
+
+    def save_details(self):
+        """
+        save_details saves new details in the detail_list
+        """
+        Details.detail_list.append(self)
+
+   
