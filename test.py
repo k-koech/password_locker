@@ -66,6 +66,16 @@ class TestDetails(unittest.TestCase):
         details_exist = Details.details_exist('Twitter')
         self.assertTrue(details_exist)
 
+    def display_details(self):
+        """
+        Displays all details saved by the user
+        """
+        self.assertEqual(Details.display_details(), Details.credential_list)
+    
+    def test_generate_password(self):
+        generated_password = self.new_details.generate_password()
+        self.assertEqual(len(generated_password), 8)
+
 
 if __name__ == '__main__':
     unittest.main()
