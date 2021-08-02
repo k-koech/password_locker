@@ -43,4 +43,8 @@ class Details:
         """
         Details.detail_list.append(self)
 
-   
+    def delete_details(self):
+        """
+        delete_details deletes a saved details in the detail_list
+        """
+        Details.detail_list.remove(self)  
