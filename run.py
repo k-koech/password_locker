@@ -26,7 +26,7 @@ def find_user(username, password):
     '''
     Function that finds a contact by number and returns the contact
     '''
-    return User.find_by_details(username, password)
+    return User.login(username, password)
 
 #............... Accounts credentials..........................
 def create_credentials(account,password):

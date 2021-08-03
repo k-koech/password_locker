@@ -16,5 +16,5 @@ class Credentials:
     def display_credentials(cls):
         return cls.credentials_list
 
-    def delete_contact(self):
+    def delete_credentials(self):
         Credentials.credentials_list.remove(self)

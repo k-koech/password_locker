@@ -28,7 +28,7 @@ class User:
         return False
 
     @classmethod
-    def find_by_details(cls,username,password):
+    def login(cls,username,password):
         '''
         Method that takes in a number and returns a contact that matches that number.
 
