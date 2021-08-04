@@ -36,6 +36,6 @@ The application has no backend. Just frontend.
     - phone :: +254725801772
 
 ### License
-*Licenced under the [MT-licence](https://github.com/k-koech/password-locker/blob/master/LICENSE.md)*
+*Licenced under the [MT-licence](https://github.com/k-koech/password_locker/blob/master/LICENSE.md)*
 Copyright (c) 2021 **Kelvin Kipchumba
 
