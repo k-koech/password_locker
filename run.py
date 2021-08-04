@@ -4,6 +4,8 @@ import random
 import string
 from user import User
 from credentials import Credentials
+from time import sleep
+
 
 def create_user(username,password):
     '''
@@ -48,7 +50,7 @@ def del_credentials(credentials):
 
 # ===================================================================
 def main():
-    print("Welcome to Password Locker.")
+    print("WELCOME TO PASSWORD LOCKER")
     print("Use the number codes")
     print("1. Create a new Account\n2. Login")
     account_code = input()
@@ -79,34 +81,41 @@ def login():
     search_username = input()
     print("Passsword : ") 
     search_password = input()
+    logged_in(search_username, search_password)
     
+def logged_in(search_username, search_password):
     if check_existing_users(search_username, search_password):
             search_user = find_user(search_username, search_password)
             system('clear')
             print(f"Logged in as {search_user.username}")
-            print('-' * 20)
-
+            print('*' * 25)
+            
             print("Choose the service you need")
             print("1. Store already existing account credentials ") 
             print("2. Create a new account credentials ")
             print("3. Display my credentials ")
+            print("4. Delete my credential ")
+            account_name = "" #declaring global function
+        
             service_choice = input()
-
             if service_choice=="1":
+                print('.' * 25)
                 print("Store already existing account credentials")
                 print("Enter your Account name")
                 account_name = input()
                 print("Enter your Account password")
                 account_password = input()
 
-                save_credentials(create_credentials(account_name, account_password)) # create and save new account credentials.
+                save_credentials(create_credentials(account_name, account_password))
                 print('\n')
                 print(f"Credentials for {account_name} created successfully")
+                sleep(2)
                 system('clear')
-                credentials()
+                logged_in(search_username, search_password)
 
 
             elif service_choice=="2":
+                print('.' * 25)
                 print("Create a NEW account credentials")
                 print("Enter your Account name")
                 account_name = input()
@@ -116,115 +125,74 @@ def login():
                 choice = input()
 
                 if choice=="1":
-                    letters = string.ascii_letters
                     password = "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
-                    save_credentials(create_credentials(account_name, password)) # create and save new account credentials.
-                    print('\n')
+                    save_credentials(create_credentials(account_name, password)) 
                     print(f"Credentials for {account_name} created successfully")
+                    print("Loading... please wait")
+                    sleep(4)
                     system('clear')
-                    credentials()
-                
+                    logged_in(search_username, search_password) 
 
                 elif choice=="2":
-                    print("Enter {account_name} 's Account password")
+                    print(f"Enter {account_name} 's Account password")
                     account_password = input()
-                    save_credentials(create_credentials(account_name, account_password)) # create and save new account credentials.
-                    print('\n')
+                    save_credentials(create_credentials(account_name, account_password))
                     print(f"Credentials for {account_name} created successfully")
+                    sleep(2)
                     system('clear')
-                    credentials()
+                    logged_in(search_username, search_password)
 
-                    print("I really didn't get that. Please use numbers representing a choce")
-
-                    print("Passsword : ") 
-                    search_password = input()
                 else:
+                    print('.' * 25)
                     print("Wrong choice! Try again")
+                    logged_in(search_username, search_password)
 
             elif service_choice=="3":
-                credentials()
+                show_credentials()
+
+            elif service_choice=="4":
+                print('.' * 25)
+                if display_credentials():
+                    print("****Your accounts****")
+                    for credentials in display_credentials():
+                        print(f"=> {credentials.account}")
+                    print("Enter account name to delete")
+                    acc_choice = input()
+                    sleep(2)
+                    del_credentials(acc_choice)
+                    print(f"{acc_choice} deleted successfully!!")
+                    
+
+                else:
+                    print("You dont seem to have any contacts saved yet")
+                    print("Loading... please wait")
+                    sleep(4)
+                    system("clear")
+                    logged_in(search_username, search_password)
             
             else:
                 print("Invalid choice! Try again")
+                logged_in(search_username, search_password)
 
     else:
-            system('clear')
-            print("Wrong credentials or User does not exist !!")
-            main()
+        system('clear')
+        print("Wrong credentials or User does not exist !! Try Again")
+        print('-' * 25)
+        main()
+        
 
 
-def credentials():
+def show_credentials():
     if display_credentials():
+            print('-' * 25)
             print("Your credentials")
             for credentials in display_credentials():
-                    print(f"Account                Password")
-                    print(f"{credentials.account} {credentials.password}")
+                    print(f"Account : {credentials.account}    Password : {credentials.password}")
             print('\n')
     else:
-            print('\n')
             print("You dont seem to have any contacts saved yet")
             print('\n')
 
-
-def del_credentials():
-    if display_credentials():
-            print("Choose aacount to delete")
-            for x in range(len(display_credentials)), credentials in display_credentials():
-                    print(f"{x+1} {credentials.account}")
-            del_credentials()
-    else:
-            print('\n')
-            print("You dont seem to have any contacts saved yet")
-            print('\n')
-
-    # while True:
-    #         print("Use these short codes : cc - create a new contact, dc - display contacts, fc -find a contact, ex -exit the contact list ")
-
-    #         short_code = input().lower()
-
-    #         if short_code == 'cc':
-    #                
-    #                 save_users(create_user(f_name,l_name,p_number,e_address)) # create and save new contact.
-    #                 print ('\n')
-    #                 print(f"New Contact {f_name} {l_name} created")
-    #                 print ('\n')
-
-    #         elif short_code == 'dc':
-
-    #                 if display_contacts():
-    #                         print("Here is a list of all your contacts")
-    #                         print('\n')
-
-    #                         for contact in display_contacts():
-    #                                 print(f"{contact.first_name} {contact.last_name} .....{contact.phone_number}")
-
-    #                         print('\n')
-    #                 else:
-    #                         print('\n')
-    #                         print("You dont seem to have any contacts saved yet")
-    #                         print('\n')
-
-    #         elif short_code == 'fc':
-
-    #                 print("Enter the number you want to search for")
-
-    #                 search_number = input()
-    #                 if check_existing_users(search_number):
-    #                         search_contact = find_contact(search_number)
-    #                         print(f"{search_contact.first_name} {search_contact.last_name}")
-    #                         print('-' * 20)
-
-    #                         print(f"Phone number.......{search_contact.phone_number}")
-    #                         print(f"Email address.......{search_contact.email}")
-    #                 else:
-    #                         print("That contact does not exist")
-
-    #         elif short_code == "ex":
-    #                 print("Bye .......")
-    #                 break
-    #         else:
-    #                 print("I really didn't get that. Please use the short codes")
 
 if __name__ == '__main__':
-
     main()
