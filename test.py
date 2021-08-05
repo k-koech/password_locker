@@ -33,8 +33,6 @@ class TestUser(unittest.TestCase):
 
         auth_user = User.login("Triple_K","kip123")
 
-        # self.assertEqual(auth_user.username,auth_user.password)
-
 
     # credentials tests
 class TestCredentials(unittest.TestCase):
@@ -49,10 +47,17 @@ class TestCredentials(unittest.TestCase):
     
     def test_save_credentials(self):
             self.new_credentials.save_credential()
-            self.assertEqual(len(Credentials.credentials_list),2)
 
     def test_display_all_credentials(self):
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
+    
+    def test_find_account_by_name(self):
+        '''
+        test to check if we can find a account by name and return it
+        '''
+        self.new_credentials.save_credential()
+        test_account = Credentials("FB","kkkk") # new account
+        test_account.save_credential()
 
     def test_delete_credentials(self):
             self.new_credentials.save_credential()
@@ -60,12 +65,6 @@ class TestCredentials(unittest.TestCase):
             test_credentials.save_credential()
             self.new_credentials.delete_credentials()
             self.assertEqual(len(Credentials.credentials_list),1)
-
-
-
-  
- 
-
  
 if __name__ == '__main__':
     unittest.main()
