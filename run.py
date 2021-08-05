@@ -41,7 +41,14 @@ def save_credentials(credentials):
 def display_credentials():
     return Credentials.display_credentials()
 
+def find_credential(account):
+    """
+    Finds a Credentials by an account name and returns the credentials that belong to that account
+    """
+    return Credentials.find_credentials(account)
+
 def del_credentials(credentials):
+    # Deletes cedentials by the account name
     credentials.delete_credentials()
 
 
@@ -56,6 +63,7 @@ def main():
     account_code = input()
 
     if account_code == "1":
+        print('-' * 45)
         print("Create your account")
         print("Username : ")    
         user_name = input()
@@ -71,6 +79,7 @@ def main():
         login()
 
     elif account_code == '2':
+        system('clear')
         login()
 
 # RE-USABLE FUNCTIONS
@@ -88,18 +97,19 @@ def logged_in(search_username, search_password):
             search_user = find_user(search_username, search_password)
             system('clear')
             print(f"Logged in as {search_user.username}")
-            print('*' * 25)
+            print('*' * 45)
             
             print("Choose the service you need")
             print("1. Store already existing account credentials ") 
             print("2. Create a new account credentials ")
             print("3. Display my credentials ")
             print("4. Delete my credential ")
+            print("5. Logout ")
             account_name = "" #declaring global function
         
             service_choice = input()
             if service_choice=="1":
-                print('.' * 25)
+                print('.' * 45)
                 print("Store already existing account credentials")
                 print("Enter your Account name")
                 account_name = input()
@@ -115,7 +125,7 @@ def logged_in(search_username, search_password):
 
 
             elif service_choice=="2":
-                print('.' * 25)
+                print('.' * 45)
                 print("Create a NEW account credentials")
                 print("Enter your Account name")
                 account_name = input()
@@ -127,6 +137,7 @@ def logged_in(search_username, search_password):
                 if choice=="1":
                     password = "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
                     save_credentials(create_credentials(account_name, password)) 
+                    print(f"Your Generated password is {password}")
                     print(f"Credentials for {account_name} created successfully")
                     print("Loading... please wait")
                     sleep(4)
@@ -143,33 +154,68 @@ def logged_in(search_username, search_password):
                     logged_in(search_username, search_password)
 
                 else:
-                    print('.' * 25)
+                    print('.' * 45)
                     print("Wrong choice! Try again")
                     logged_in(search_username, search_password)
 
             elif service_choice=="3":
                 show_credentials()
+                print("Press x or any key to exit ")
+                exit = input()
+
+                counter = 2
+               
+                if exit == "X" or exit=='x': 
+                    for x in reversed(range(counter)):
+                        print(f"Redirecting in {x} seconds")
+                        sleep(1)      
+                else:
+                    for x in reversed(range(counter)):
+                        print(f"Redirecting in {x} seconds")
+                        sleep(1)
+
+                system("clear")
+                logged_in(search_username, search_password)
 
             elif service_choice=="4":
-                print('.' * 25)
+                print('.' * 45)
                 if display_credentials():
-                    print("****Your accounts****")
+                    print("*******Your accounts*******")
                     for credentials in display_credentials():
                         print(f"=> {credentials.account}")
                     print("Enter account name to delete")
-                    acc_choice = input()
-                    sleep(2)
-                    del_credentials(acc_choice)
-                    print(f"{acc_choice} deleted successfully!!")
+                    search_account = input()
                     
+                    if find_credential(search_account):
+                        search_credential = find_credential(search_account)
+                        print("_"*45)
+                        search_credential.delete_credentials()
+                        print('\n')
+                        print(f"Your stored credentials for {search_credential.account} account is successfully deleted!!!")
+                        sleep(3)
+                        logged_in(search_username, search_password)
+                        
+                    else:
+                        print("_"*45)
+                        print("That Credential you want to delete does not exist! Please create some")  
+                        print("Redirecting... please wait")
+                        sleep(3)
+                        logged_in(search_username, search_password)              
 
                 else:
+                    print("_"*45)
                     print("You dont seem to have any contacts saved yet")
                     print("Loading... please wait")
                     sleep(4)
                     system("clear")
                     logged_in(search_username, search_password)
             
+            elif service_choice=="5":
+                print("-"*35)
+                print("Logging you out ...")
+                sleep(2)
+                system('clear')
+                main()
             else:
                 print("Invalid choice! Try again")
                 logged_in(search_username, search_password)
@@ -177,21 +223,22 @@ def logged_in(search_username, search_password):
     else:
         system('clear')
         print("Wrong credentials or User does not exist !! Try Again")
-        print('-' * 25)
+        print('-' * 45)
         main()
         
 
 
 def show_credentials():
     if display_credentials():
-            print('-' * 25)
+            print('-' * 45)
             print("Your credentials")
             for credentials in display_credentials():
                     print(f"Account : {credentials.account}    Password : {credentials.password}")
-            print('\n')
+            print('-' * 45)
     else:
-            print("You dont seem to have any contacts saved yet")
-            print('\n')
+            print('-' * 45)
+            print("You dont seem to have any CREDENTIALS saved yet")
+            
 
 
 if __name__ == '__main__':

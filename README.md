@@ -9,7 +9,7 @@
     - Download a file in the code section to the desired folder
     - Extract the files
     - Open the folder with vs code.
-    - Run the code in vs code.
+    - Run the code in vs code 
     - And you are all done
 The application has no backend. Just frontend.
 

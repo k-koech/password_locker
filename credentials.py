@@ -19,30 +19,17 @@ class Credentials:
         """
         return cls.credentials_list
 
+    @classmethod
+    def find_credentials(cls, account):
+        """
+        This Method that takes in a account name and returns a credential that matches that account name.
+        """
+        for credential in cls.credentials_list:
+            if credential.account == account:
+                return credential
+
     def delete_credentials(self):
-        #function to delete users savd credentials
+        #function to delete users saved credentials based on its name
         Credentials.credentials_list.remove(self)
 
-
-    listToDelete = ['abc', 'efg']
-    arrayOfObjects = [{id:'abc',name:'oh'}, 
-                      {id:'efg',name:'em'}, 
-                      {id:'hij',name:'ge'}] 
-    for i in arrayOfObjects.length:
-        obj = arrayOfObjects[i]
-        i+=0
-
-    if (listToDelete.indexOf(obj.id) !== -1) {
-        arrayOfObjects.splice(i, 1);
     
-
-    @classmethod
-    def user_exist(cls,account):
-        """
-         Class that generates new instances of Users.
-        """
-        for credentials in cls.credentials_list:
-            if credentials.account == account:
-                return True
-
-        return False
