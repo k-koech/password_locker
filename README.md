@@ -9,13 +9,13 @@
     - Download a file in the code section to the desired folder
     - Extract the files
     - Open the folder with vs code.
-    - Run the code in vs code 
+    - Run the code in vs code or run in terminal using "python3 run.py" command
     - And you are all done
 The application has no backend. Just frontend.
 
 ## BDD
     A user should;
-    - Create a password locker account with my details, a login username and password.
+    - Create a password locker account with my details, a login username and password and use them to login.
     - store my already existing account credentials in the application. 
     - create new account credentials in the application. F
     - have the option of putting in a password that I want to use for the new credential account.
